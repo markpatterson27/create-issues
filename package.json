@@ -1,0 +1,26 @@
+{
+  "name": "create-issues",
+  "version": "1.0.0",
+  "description": "A GitHub Action that creates new issues from files in a directory.",
+  "main": "src/index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markpatterson27/create-issues.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/markpatterson27/create-issues/issues"
+  },
+  "homepage": "https://github.com/markpatterson27/create-issues#readme",
+  "dependencies": {
+    "@actions/core": "^1.4.0"
+  }
+}
