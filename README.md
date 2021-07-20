@@ -30,6 +30,10 @@ jobs:
 | Input Name | Required | Default | Description |
 |---|---|---|---|
 | `github-token` |  |  | The GitHub token used to create an authenticated client |
+| `project-file` | no |  | Path to a markdown file. Front matter content can be used to set project name, description and columns. If either a vaild file path or project-name is given, a project will be created. |
+| `project-name` | no |  | Name to use for project. If a vaild file path or project-name is given, a project will be created. |
+| `project-description` | no |  | Description to use for the project. |
+
 
 ## Similar Projects
 
