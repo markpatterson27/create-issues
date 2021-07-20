@@ -7,7 +7,9 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint .",
+    "build": "ncc build ./src/index.js -o dist --source-map --license licenses.txt",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -22,5 +24,10 @@
   "homepage": "https://github.com/markpatterson27/create-issues#readme",
   "dependencies": {
     "@actions/core": "^1.4.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.29.0",
+    "eslint": "^7.31.0",
+    "jest": "^27.0.6"
   }
 }
