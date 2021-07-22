@@ -37,6 +37,49 @@ function readTextFile(filePath) {
     }
 }
 
+// return files in directory
+function listFiles(dirPath) {
+
+    // throw error if filePath not string
+    if (typeof dirPath !== 'string') {
+        // throw new Error('content not a string');
+        throw new TypeError("File path not a string");
+    }
+
+    // filePath will be relative to repo root, not to action workspace. need to use full path
+    const workspace = process.env.GITHUB_WORKSPACE;
+    const fullPath = path.join(workspace, dirPath);
+
+    try {
+        // return only filenames, not sub-dir
+        const files =  fs.readdirSync(fullPath, {withFileTypes: true})
+            .filter(item => !item.isDirectory())
+            .map(item => item.name);
+
+        if (files.length === 0) {
+            let emptyDirError = new Error("Directory empty");
+            emptyDirError.code = 'EMPTYDIR';
+            throw emptyDirError;
+        }
+
+        return files;
+    } catch (error) {
+        console.log(error.name);
+        if (error.code === 'ENOENT') {
+            console.error(`::error::Issues directory ${dirPath} not found.`);
+            error.message += `\nIssues directory ${dirPath} not found.`;
+        } else if (error.code === 'EMPTYDIR') {
+            console.error(`::error::No files found in directory ${dirPath}`);
+            error.message += `\nNo files found in directory ${dirPath}`
+        }
+        else {
+            console.error(`::error::Unable to read issues directory ${dirPath}.`);
+            error.message += `\nUnable to read issues directory ${dirPath}.`;
+        }
+        throw error;
+    }
+}
+
 // parse through templating
 function parseTemplate(content, templateVariables) {
 
@@ -93,7 +136,6 @@ function parseMatter(content) {
     // console.log(parsed);
 
     return parsed;
-
 }
 
-module.exports = { readTextFile, parseTemplate, parseMatter };
+module.exports = { readTextFile, listFiles, parseTemplate, parseMatter };

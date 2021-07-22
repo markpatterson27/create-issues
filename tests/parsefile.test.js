@@ -1,5 +1,5 @@
 const { test, expect, beforeEach } = require('@jest/globals');
-const { readTextFile, parseTemplate, parseMatter } = require('../src/parsefile');
+const { readTextFile, parseTemplate, parseMatter, listFiles } = require('../src/parsefile');
 
 const testContent = {
     noFM: "This is some text without front matter content.",
@@ -58,6 +58,9 @@ const testTemplates = {
 describe("readFile function", () => {
     beforeEach(() => {
     });
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
 
     // test throws error if input not string
     test('throws not string', () => {
@@ -85,12 +88,58 @@ describe("readFile function", () => {
         const filePath = 'examples/kanban-project/project.md';
         const expected = testContent.projectColumnList;
         expect(readTextFile(filePath)).toEqual(expected);
+    });
+});
 
+// test listFiles
+describe("listFiles function", () => {
+    beforeEach(() => {
+    });
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
+
+    // test throws error if input not string
+    test('throws not string', () => {
+        const input = 5;
+        // expect(parseMatter(5)).toThrow('content not a string');
+        expect(() => {listFiles(input);}).toThrow(TypeError);
+        expect(() => {listFiles(input);}).toThrow("File path not a string");
+    });
+
+    // test throws directory not found error
+    test('throws dir not found error', () => {
+        const input = 'unknown';
+        expect(() => {listFiles(input);}).toThrow('ENOENT');
+    });
+
+    // test sends directory empty message
+    test('warns dir empty', () => {
+        const dirPath = 'examples';
+        jest.spyOn(console, 'error').mockImplementation(() => {});
+        // jest.spyOn(console, 'warn').mockImplementation(() => {});
+        // expect(listFiles(dirPath)).toEqual([]);
+        // expect(console.warn).toHaveBeenCalled();
+        expect(() => {listFiles(dirPath);}).toThrow('Directory empty');
+        expect(console.error).toHaveBeenCalled();
+    });
+
+    // reads directory content - returns only files
+    test('reads file contents', () => {
+        const dirPath = 'examples/kanban-project';
+        const expected = ['project.md'];
+        expect(listFiles(dirPath)).toEqual(expected);
     });
 });
 
 // test parseTemplate
 describe("parseTemplate function", () => {
+    beforeEach(() => {
+    });
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
+
     // test throws error if input not string
     test('throws not string', () => {
         const content = 5;
@@ -152,6 +201,12 @@ The test action is just tesing.
 
 // test parseMatter
 describe("parseMatter function", () => {
+    beforeEach(() => {
+    });
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
+
     // test throws error if input not string
     test('throws not string', () => {
         const input = 5;
