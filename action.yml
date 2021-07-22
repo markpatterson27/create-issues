@@ -15,7 +15,9 @@ inputs:
   project-description:
     description: Description of project
     required: false
-
+  column-names:
+    description: 'Column names to create and add issues to'
+    required: false
 
 runs:
   using: 'node12'
