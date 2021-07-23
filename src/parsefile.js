@@ -29,7 +29,7 @@ function readTextFile(filePath) {
     } catch (error) {
         if (error.code === 'ENOENT') {
             // don't throw error, but give warning
-            console.warn(`::warning::File ${filePath} not found! You may need to use actions/checkout to clone the repository first.`);
+            console.warn(`::warning::File '${filePath}' not found! You may need to use actions/checkout to clone the repository first.`);
             // error.message += `\nFile ${filePath} not found! You may need to use actions/checkout to clone the repository first.`
         } else {
             throw error;
@@ -64,17 +64,17 @@ function listFiles(dirPath) {
 
         return files;
     } catch (error) {
-        console.log(error.name);
+        // console.log(error.name);
         if (error.code === 'ENOENT') {
-            console.error(`::error::Issues directory ${dirPath} not found.`);
-            error.message += `\nIssues directory ${dirPath} not found.`;
+            console.error(`::error::Issues directory '${dirPath}' not found.`);
+            error.message = `Issues directory '${dirPath}' not found.\n\n` + error.message;
         } else if (error.code === 'EMPTYDIR') {
-            console.error(`::error::No files found in directory ${dirPath}`);
-            error.message += `\nNo files found in directory ${dirPath}`
+            console.error(`::error::No files found in directory '${dirPath}'`);
+            error.message = `No files found in directory '${dirPath}'.\n\n` + error.message;
         }
         else {
-            console.error(`::error::Unable to read issues directory ${dirPath}.`);
-            error.message += `\nUnable to read issues directory ${dirPath}.`;
+            console.error(`::error::Unable to read issues directory '${dirPath}'.`);
+            error.message = `Unable to read issues directory '${dirPath}'.\n\n` + error.message;
         }
         throw error;
     }
