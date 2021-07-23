@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const { createProject } = require('./createissues');
+const { createProject, createIssue } = require('./createissues');
 const { projectDetails, issuesDetails } = require('./parsedetails');
 
 // most @actions toolkit packages have async methods
@@ -37,9 +37,11 @@ async function run() {
         const issues = issuesDetails(issuesDir, project, columnIDs, templateVariables);
 
         // for each issue
-        //   create issue - send octokit, issue. return ?
-        //   if project: add to column
-        
+        for (let issue of issues) {
+            // create issue
+            //   if project: add to column
+            createIssue(octokit, issue);
+        }
 
     } catch (error) {
         core.setFailed(error.message);

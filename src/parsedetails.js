@@ -47,7 +47,7 @@ function issuesDetails(issuesDir, project, columnIDs, templateVariables) {
             issues.push(issue);
         }
     }
-    console.log(issues); // debug
+    // console.log(issues); //debug
     return issues;
 }
 
@@ -79,7 +79,7 @@ function issueDetails(file, project, columnIDs, templateVariables) {
             issue.columnID = findColumnID(parsedFM, project, columnIDs);
         }
 
-        console.log(issue); // debug
+        // console.log(issue); //debug
         return issue;
     }
     return;
