@@ -87,7 +87,7 @@ function issueDetails(file, project, columnIDs, templateVariables) {
 
 // process column attribute and return associated column ID
 function findColumnID(parsedFM, project, columnIDs) {
-    console.log(Number(parsedFM.attributes.column));
+    // console.log(Number(parsedFM.attributes.column)); //debug
     // if column is int AND int <= columnIDs.length -> use int
     if (Number.isInteger(Number(parsedFM.attributes.column)) && 0 < Number(parsedFM.attributes.column) && Number(parsedFM.attributes.column) <= columnIDs.length) {
         return columnIDs[Number(parsedFM.attributes.column)-1];
