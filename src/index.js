@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const { createProject } = require('./createissues');
-const { projectDetails } = require('./parsedetails');
+const { projectDetails, issuesDetails } = require('./parsedetails');
 
 // most @actions toolkit packages have async methods
 async function run() {
@@ -12,6 +12,7 @@ async function run() {
         const projectName = core.getInput('project-name');
         const projectDescription = core.getInput('project-description');
         const columnNames = core.getInput('column-names');
+        const issuesDir = core.getInput('issues-directory');
 
         // auth octokit
         const octokit = new github.getOctokit(token);
@@ -31,11 +32,12 @@ async function run() {
             columnIDs = await createProject(octokit, project);
         }
         // console.log(columnIDs);   //debug
-        
-        // read issues dir
-        // for each file
-        //   process file
-        //   create issue
+
+        // send issueDir, columnIDs, project, templateVars. return array of issues
+        const issues = issuesDetails(issuesDir, project, columnIDs, templateVariables);
+
+        // for each issue
+        //   create issue - send octokit, issue. return ?
         //   if project: add to column
         
 

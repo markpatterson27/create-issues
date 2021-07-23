@@ -34,6 +34,7 @@ jobs:
 | `project-name` | no |  | Name to use for project. If a vaild file path or project-name is given, a project will be created. |
 | `project-description` | no |  | Description to use for the project. |
 | `column-names` | no | 'To Do' | Column names to create and add issues to. Can be either a single name to create one column, or list of names to create multiple columns. |
+| `issues-directory` | no | '.github/ISSUES/' | Relative path to look for issue files. |
 
 ## Similar Projects
 

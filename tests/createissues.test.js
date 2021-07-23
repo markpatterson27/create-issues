@@ -11,7 +11,7 @@ describe("createProject function", () => {
     let columnParams;
     beforeEach(() => {
         // mock create project POST
-        let projectScope = nock('https://api.github.com')
+        nock('https://api.github.com')
           .post(/\/repos\/.*\/.*\/projects/)
           .reply(201, (uri, body) => {
             projectParams = body;
@@ -25,7 +25,7 @@ describe("createProject function", () => {
             return response;
           })
         // mock create columns POST
-        let columnScope = nock('https://api.github.com')
+        nock('https://api.github.com')
           .post(/\/projects\/.*\/columns/)
           .times(4)
           .reply(201, (uri, body) => {

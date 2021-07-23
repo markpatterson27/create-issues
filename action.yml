@@ -18,6 +18,10 @@ inputs:
   column-names:
     description: 'Column names to create and add issues to'
     required: false
+  issues-directory:
+    description: 'Relative directory path to look for issue files.'
+    required: false
+    default: '.github/ISSUES/'
 
 runs:
   using: 'node12'
