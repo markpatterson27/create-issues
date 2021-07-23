@@ -35,12 +35,14 @@ async function run() {
 
         // send issueDir, columnIDs, project, templateVars. return array of issues
         const issues = issuesDetails(issuesDir, project, columnIDs, templateVariables);
+        // console.log(issues); //debug
 
         // for each issue
         for (let issue of issues) {
             // create issue
             //   if project: add to column
-            createIssue(octokit, issue);
+            // createIssue(octokit, issue);
+            await createIssue(octokit, issue);
         }
 
     } catch (error) {
@@ -48,4 +50,8 @@ async function run() {
     }
 }
 
-run();
+if (require.main === module) {
+    run();
+}
+
+module.exports = { run };
