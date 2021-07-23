@@ -43,7 +43,7 @@ function listFiles(dirPath) {
     // throw error if filePath not string
     if (typeof dirPath !== 'string') {
         // throw new Error('content not a string');
-        throw new TypeError("File path not a string");
+        throw new TypeError("Directory path not a string");
     }
 
     // filePath will be relative to repo root, not to action workspace. need to use full path

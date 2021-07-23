@@ -104,7 +104,7 @@ describe("listFiles function", () => {
         const input = 5;
         // expect(parseMatter(5)).toThrow('content not a string');
         expect(() => {listFiles(input);}).toThrow(TypeError);
-        expect(() => {listFiles(input);}).toThrow("File path not a string");
+        expect(() => {listFiles(input);}).toThrow("Directory path not a string");
     });
 
     // test throws directory not found error
