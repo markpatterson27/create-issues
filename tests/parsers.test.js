@@ -1,5 +1,5 @@
 const { test, expect, beforeEach } = require('@jest/globals');
-const { readTextFile, parseTemplate, parseMatter, listFiles } = require('../src/parsefile');
+const { readTextFile, parseTemplate, parseMatter, listFiles } = require('../src/parsers');
 
 const testContent = {
     noFM: "This is some text without front matter content.",

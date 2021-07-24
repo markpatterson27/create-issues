@@ -1,5 +1,9 @@
+/**
+ * Functions to wrap and process API calls.
+ */
 const github = require('@actions/github');
 
+// create repo project and project columns
 async function createProject(octokit, project) {
     let columnIDs = [];
 
@@ -32,6 +36,7 @@ async function createProject(octokit, project) {
     return columnIDs;
 }
 
+// create issue and add as card to project column
 async function createIssue(octokit, issue) {
     // create issue
     console.log(`Creating issue ${issue.title}...`);

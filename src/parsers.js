@@ -1,3 +1,6 @@
+/**
+ * Functions to parse data from files.
+ */
 const fm = require('front-matter');
 const nunjucks = require('nunjucks');
 const fs = require('fs');

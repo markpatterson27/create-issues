@@ -1,7 +1,8 @@
-// const fs = require('fs');
+/**
+ * Functions to reformat and rearrange data into formats accepted by API calls.
+ */
 const path = require('path');
-const { listToArray } = require('./helpers');
-const { readTextFile, parseTemplate, parseMatter, listFiles } = require('./parsefile');
+const { readTextFile, parseTemplate, parseMatter, listFiles } = require('./parsers');
 
 // process action inputs and return project details - name, description and columns
 function projectDetails(projectFile, projectName, projectDescription, columnNames, templateVariables) {
@@ -104,4 +105,10 @@ function findColumnID(parsedFM, project, columnIDs) {
     }
 }
 
-module.exports = { projectDetails, issuesDetails, issueDetails, findColumnID }
+// convert input to an array
+function listToArray (list) {
+    if (!list) return []
+    return Array.isArray(list) ? list : list.split(', ')
+}
+
+module.exports = { projectDetails, issuesDetails, issueDetails, findColumnID, listToArray }
