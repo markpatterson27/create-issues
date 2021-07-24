@@ -1,5 +1,7 @@
 # Create Issues Action
 
+[![units-test](https://github.com/markpatterson27/create-issues/actions/workflows/test.yml/badge.svg)](https://github.com/markpatterson27/create-issues/actions/workflows/test.yml)
+
 A GitHub Action that creates new issues from files in a directory.
 
 ## Usage

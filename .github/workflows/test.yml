@@ -5,19 +5,61 @@ on:
     branches:
       - main
       - 'releases/*'
+    paths:
+      - 'src/**'
+      - 'tests/**'
+  workflow_dispatch:
 
 jobs:
   # unit tests
   units:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 12
     - run: npm ci
     - run: npm test
 
   # test action works running from the graph
-  test:
+  integration-test:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 12
+    - run: npm ci
+    - run: npm run build
+
+    # action - empty dir
+    - name: setup - empty dir
+      run: mkdir empty
     - uses: ./
+      name: action - empty dir
+      id: action-empty-dir
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        issues-directory: empty
+      continue-on-error: true
+    - name: test - empty dir
+      if: ${{ steps.action-empty-dir.outcome != 'failure' }}
+      run: |
+        echo "::error::Test fail - empty dir doesn't trigger error"
+        exit 1
+    
+    # action - single blank file shouldn't trigger anything or create any issues
+    - name: setup - blank file
+      run: touch empty/blank.md
+    - uses: ./
+      name: action - blank file
+      id: action-blank-file
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        issues-directory: empty
