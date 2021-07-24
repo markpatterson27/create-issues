@@ -22,6 +22,8 @@ jobs:
         uses: markpatterson27/create-issues@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          project-file: examples/kanban-project/project.md
+          issues-directory: examples/kanban-project/ISSUES
 
 ```
 
@@ -38,4 +40,4 @@ jobs:
 
 ## Similar Projects
 
-If you just need to create a single issue have a look at [JasonEtco/create-an-issue](https://github.com/JasonEtco/create-an-issue).
+If you just need to create a single issue there is [JasonEtco/create-an-issue](https://github.com/JasonEtco/create-an-issue).
