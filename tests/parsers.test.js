@@ -110,7 +110,9 @@ describe("listFiles function", () => {
     // test throws directory not found error
     test('throws dir not found error', () => {
         const input = 'unknown';
+        jest.spyOn(console, 'error').mockImplementation(() => {});
         expect(() => {listFiles(input);}).toThrow('ENOENT');
+        expect(console.error).toHaveBeenCalled();
     });
 
     // test sends directory empty message
