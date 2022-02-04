@@ -32,7 +32,7 @@
     "@vercel/ncc": "^0.33.3",
     "eslint": "^8.10.0",
     "jest": "^27.5.1",
-    "nock": "^13.2.2"
+    "nock": "^13.2.4"
   },
   "jest": {
     "testEnvironment": "node",
