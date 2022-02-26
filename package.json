@@ -29,10 +29,10 @@
     "nunjucks": "^3.2.3"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.33.1",
-    "eslint": "^8.6.0",
-    "jest": "^27.4.7",
-    "nock": "^13.2.2"
+    "@vercel/ncc": "^0.33.3",
+    "eslint": "^8.10.0",
+    "jest": "^27.5.1",
+    "nock": "^13.2.4"
   },
   "jest": {
     "testEnvironment": "node",
